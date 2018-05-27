@@ -1,5 +1,5 @@
 ;;; mtc-mode.el --- simple major mode for editing MTC files
--*- coding: utf-8; lexical-binding: t; -*-
+;; -*- coding: utf-8; lexical-binding: t; -*-
 
 ;; Copyright © 2018, by Gerry Agbobada
 
