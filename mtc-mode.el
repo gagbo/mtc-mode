@@ -150,6 +150,8 @@
         ;; C++ style comment “// …”
         (modify-syntax-entry ?\/ ". 12b" synTable)
         (modify-syntax-entry ?\n "> b" synTable)
+        ;; Add = to the words class
+        (modify-syntax-entry ?\= "w" synTable)
         synTable))
 
 (define-derived-mode mtc-mode fundamental-mode "MTC script"
