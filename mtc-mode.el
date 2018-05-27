@@ -25,6 +25,9 @@
 
 ;; create the list for font-lock
 ;; each category of keyword is given a particular face
+
+(defvar mtc-font-lock-keywords nil "Keywords highlights for mtc-mode.")
+
 (setq mtc-font-lock-keywords
       (let* (
              (x-mtc-assign '(
@@ -149,7 +152,7 @@
         (modify-syntax-entry ?\n "> b" synTable)
         synTable))
 
-(define-derived-mode mtc-mode fundamental-mode "mtc mode"
+(define-derived-mode mtc-mode fundamental-mode "MTC script"
                      "Major mode for editing mtc scripts (Cemef's Cimlib interface)..."
                      ;; code for syntax highlighting
                      (setq-local font-lock-defaults '((mtc-font-lock-keywords)))
