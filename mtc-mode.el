@@ -118,27 +118,44 @@
                                  "ModeleLoi=" "ConditionLimite="
                                  ))
              ;; generate regex string for each category
-             (x-mtc-assign-regexp (regex-opt x-mtc-assign 'words))
-             (x-mtc-appel-regexp (regex-opt x-mtc-appel 'words))
-             (x-mtc-decla-regexp (regex-opt x-mtc-decla 'words))
-             (x-lanceur-regexp (regex-opt x-lanceur 'words))
-             (x-mtc-type-regexp (regex-opt x-mtc-type 'words))
-             (x-mtc-modele-regexp (regex-opt x-mtc-modele 'words))
-             (x-mtc-modele-arg-regexp (regex-opt x-mtc-modele-arg 'words)))
-        (
-         (,x-lanceur-regexp . font-lock-constant-face)
-         (,x-mtc-decla-regexp . font-lock-builtin-face)
-         (,x-mtc-assign-regexp . font-lock-type-face)
-         (,x-mtc-type-regexp . font-lock-function-name-face)
-         (,x-mtc-modele-regexp . font-lock-function-name-face)
-         (,x-mtc-modele-arg-regexp . font-lock-builtin-face)
-         (,x-mtc-appel-regexp . font-lock-builtin-face)
+             (x-mtc-assign-regexp (regexp-opt x-mtc-assign 'words))
+             (x-mtc-appel-regexp (regexp-opt x-mtc-appel 'words))
+             (x-mtc-decla-regexp (regexp-opt x-mtc-decla 'words))
+             (x-lanceur-regexp (regexp-opt x-lanceur 'words))
+             (x-mtc-type-regexp (regexp-opt x-mtc-type 'words))
+             (x-mtc-modele-regexp (regexp-opt x-mtc-modele 'words))
+             (x-mtc-mod-arg-regexp (regexp-opt x-mtc-modele-arg 'words)))
+        `(
+          (,x-lanceur-regexp . font-lock-preprocessor-face)
+          (,x-mtc-decla-regexp . font-lock-builtin-face)
+          (,x-mtc-assign-regexp . font-lock-keyword-face)
+          (,x-mtc-type-regexp . font-lock-type-face)
+          (,x-mtc-modele-regexp . font-lock-function-name-face)
+          (,x-mtc-mod-arg-regexp . font-lock-builtin-face)
+          (,x-mtc-appel-regexp . font-lock-builtin-face)
+          ("\\([a-zA-Z0-9-_]+?.mtc\\)" . (1 font-constant-face))
+          ("\\([a-zA-Z0-9-_]+?.t\\)" . (1 font-constant-face))
+          ("\\(-?[0-9]+?\\([eE][+-]?[0-9]+?\\)?\\)" . (1 font-constant-face))
+          ("{\\([^}]+?\\)}" . (1 font-variable-name-face))
     )))
 
-(define-derived-mode mtc-mode c-mode "mtc mode"
+
+(defvar mtc-mode-syntax-table nil "Syntax table for 'mtc-mode'.")
+
+(setq mtc-mode-syntax-table
+      (let ( (synTable (make-syntax-table)))
+        ;; C++ style comment “// …”
+        (modify-syntax-entry ?\/ ". 12b" synTable)
+        (modify-syntax-entry ?\n "> b" synTable)
+        synTable))
+
+(define-derived-mode mtc-mode fundamental-mode "mtc mode"
                      "Major mode for editing mtc scripts (Cemef's Cimlib interface)..."
                      ;; code for syntax highlighting
-                     (setq font-lock-defaults '((mtc-font-lock-keywords))))
+                     (setq-local font-lock-defaults '((mtc-font-lock-keywords)))
+                     (setq-local comment-start "//")
+                     (setq-local comment-end "")
+                     )
 
 (provide 'mtc-mode)
 
