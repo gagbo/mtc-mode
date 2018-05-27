@@ -130,18 +130,18 @@
              (x-mtc-mod-arg-regexp (regexp-opt x-mtc-modele-arg 'words)))
         `(
           (,x-lanceur-regexp . font-lock-preprocessor-face)
-          (,x-mtc-decla-regexp . font-lock-builtin-face)
-          (,x-mtc-assign-regexp . font-lock-keyword-face)
+          (,x-mtc-decla-regexp . font-lock-keyword-face)
+          (,x-mtc-assign-regexp . font-lock-builtin-face)
           (,x-mtc-type-regexp . font-lock-type-face)
           (,x-mtc-modele-regexp . font-lock-function-name-face)
           (,x-mtc-mod-arg-regexp . font-lock-builtin-face)
           (,x-mtc-appel-regexp . font-lock-builtin-face)
-          ("\\([a-zA-Z0-9-_]+?.mtc\\)" . (1 font-constant-face))
-          ("\\([a-zA-Z0-9-_]+?.t\\)" . (1 font-constant-face))
-          ("\\(-?[0-9]+?\\([eE][+-]?[0-9]+?\\)?\\)" . (1 font-constant-face))
-          ("{\\([^}]+?\\)}" . (1 font-variable-name-face))
+          ("^{[:space:]+\\([a-zA-Z]+?\\)[:space:]*=" . font-command-face)
+          ("[a-zA-Z0-9-_/]+\\.mtc" . font-constant-face)
+          ("[a-zA-Z0-9-_/]+\\.t" . font-constant-face)
+          ("Data:[:space:]+[a-zA-Z0-9-_]*" . font-constant-face)
+          ("\\(-?[0-9]+\\([eE][+-]?[0-9]+\\)?\\)" . font-constant-face)
     )))
-
 
 (defvar mtc-mode-syntax-table nil "Syntax table for 'mtc-mode'.")
 
