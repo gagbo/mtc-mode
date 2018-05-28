@@ -113,8 +113,8 @@
                                  "SimplexSolveurFonctionnel=" "ItemSolveur="
                                  "SolveurLocal=" "Solveur=" "Dependance="
                                  "DependanceModifiable=" "DependanceAEcrire="
-                                 "DependanceALire=" "nextgroup=mtcData" "skipwhite"
-                                 "Maillage=" "nextgroup=mtcData" "skipwhite"
+                                 "DependanceALire="
+                                 "Maillage="
                                  "Modele=" "ModeleIncrement=" "ModeleTerminaison="
                                  "ModeleApresFin=" "ModeleAvantDebut="
                                  "ModeleTrue=" "ModeleFalse=" "ModeleCL="
@@ -127,7 +127,16 @@
              (x-lanceur-regexp (regexp-opt x-lanceur 'words))
              (x-mtc-type-regexp (regexp-opt x-mtc-type 'words))
              (x-mtc-modele-regexp (regexp-opt x-mtc-modele 'words))
-             (x-mtc-mod-arg-regexp (regexp-opt x-mtc-modele-arg 'words)))
+             (x-mtc-mod-arg-regexp (regexp-opt x-mtc-modele-arg 'words))
+             (x-mtc-modele-name-regexp
+              "^{[ \t]+\\<\\([a-zA-Z]+?\\)\\>[ \t]*=")
+             (x-mtc-included-file-regexp
+              "\\_<[a-zA-Z0-9_/-]+\\.\\(mtc\\|t\\)\\_>")
+             (x-mtc-data-file-regexp
+              "\\(Data:[ \t]+[^ \t]*\\)")
+             (x-mtc-number-regexp
+              "\\_<\\(-?[0-9]+\\(\\.[0-9]*\\)?\\([eE][+-]?[0-9]+\\)?\\)\\_>")
+             )
         `(
           (,x-lanceur-regexp . font-lock-preprocessor-face)
           (,x-mtc-decla-regexp . font-lock-keyword-face)
@@ -136,12 +145,10 @@
           (,x-mtc-modele-regexp . font-lock-function-name-face)
           (,x-mtc-mod-arg-regexp . font-lock-builtin-face)
           (,x-mtc-appel-regexp . font-lock-builtin-face)
-          ("^{[:space:]+\\([a-zA-Z]+?\\)[:space:]*=" . font-command-face)
-          ("[a-zA-Z0-9-_/]+\\.mtc" . font-constant-face)
-          ("[a-zA-Z0-9-_/]+\\.t" . font-constant-face)
-          ("Data:[:space:]+[a-zA-Z0-9-_]*" . font-constant-face)
-          ("\\(-?[0-9]+\\([eE][+-]?[0-9]+\\)?\\)" . font-constant-face)
-    )))
+          (,x-mtc-modele-name-regexp . font-lock-variable-name-face)
+          (,x-mtc-included-file-regexp . font-lock-module-def-face)
+          (,x-mtc-data-file-regexp . font-lock-module-def-face)
+          (,x-mtc-number-regexp . font-lock-prompt-face))))
 
 (defvar mtc-mode-syntax-table nil "Syntax table for 'mtc-mode'.")
 
