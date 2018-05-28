@@ -145,7 +145,7 @@
           (,x-mtc-modele-regexp . font-lock-function-name-face)
           (,x-mtc-mod-arg-regexp . font-lock-builtin-face)
           (,x-mtc-appel-regexp . font-lock-builtin-face)
-          (,x-mtc-modele-name-regexp . font-lock-variable-name-face)
+          (,x-mtc-modele-name-regexp . (1 font-lock-variable-name-face))
           (,x-mtc-included-file-regexp . font-lock-module-def-face)
           (,x-mtc-data-file-regexp . font-lock-module-def-face)
           (,x-mtc-number-regexp . font-lock-prompt-face))))
