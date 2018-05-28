@@ -1,5 +1,6 @@
+path_to_emacs := $(shell which emacs)
 
-ifeq ($(which emacs), 0)
+ifeq (${.SHELLSTATUS} , 0)
 install: mtc-mode.el
 	ln -s mtc-mode.el ~/.emacs.d/
 else
